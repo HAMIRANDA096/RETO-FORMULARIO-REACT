@@ -1,23 +1,20 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Reto Formulario React</title>
 
     <!-- React -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-
     <!-- ReactDOM -->
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-
     <!-- Babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <link rel="stylesheet" href="/index.css">
+    <!-- Ruta relativa para evitar error 404 en GitHub Pages -->
+    <link rel="stylesheet" href="./index.css">
 </head>
 
 <body>
@@ -28,96 +25,96 @@
 
         // Componente principal
         function App() {
+            // Un solo estado para agrupar los campos del formulario
+            const [formData, setFormData] = React.useState({
+                usuario: "",
+                correo: "",
+                mensaje: ""
+            });
 
-            const [usuario, setUsuario] = React.useState("");
+            const handleChange = (e) => {
+                setFormData({
+                    ...formData,
+                    [e.target.name]: e.target.value
+                });
+            };
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                alert(`Formulario Enviado:\nNombre: ${formData.usuario}\nCorreo: ${formData.correo}\nMensaje: ${formData.mensaje}`);
+            };
 
             return (
                 <div className="container">
-
                     <h1>Reto Formulario React</h1>
 
-                    <Usuario />
+                    <form onSubmit={handleSubmit}>
+                        <Usuario value={formData.usuario} onChange={handleChange} />
+                        <Correo value={formData.correo} onChange={handleChange} />
+                        <Mensaje value={formData.mensaje} onChange={handleChange} />
 
-                    <Correo />
-
-                    <Mensaje />
-
-                    <button
-                        onClick={() => {
-                            alert("Formulario enviado");
-                        }}
-                    >
-                        Enviar
-                    </button>
-
-                    
-
+                        <button type="submit">Enviar</button>
+                    </form>
                 </div>
             );
         }
 
-
-        // Usuario
-        function Usuario() {
-
+        // Componente Usuario
+        function Usuario({ value, onChange }) {
             return (
                 <div>
-
                     <h2>Nombre:</h2>
-
                     <input
                         type="text"
+                        name="usuario"
+                        value={value}
+                        onChange={onChange}
                         placeholder="Escribe tu nombre"
+                        required
                     />
-
                 </div>
             );
         }
 
-
-        // Correo
-        function Correo() {
-
+        // Componente Correo
+        function Correo({ value, onChange }) {
             return (
                 <div>
-
                     <h2>Correo:</h2>
-
                     <input
                         type="email"
+                        name="correo"
+                        value={value}
+                        onChange={onChange}
                         placeholder="Escribe tu correo"
+                        required
                     />
-
                 </div>
             );
         }
 
-
-        // Mensaje
-        function Mensaje() {
-
+        // Componente Mensaje
+        function Mensaje({ value, onChange }) {
             return (
                 <div>
-
                     <h2>Mensaje:</h2>
-
-                    <input
-                        type="text"
+                    <textarea
+                        name="mensaje"
+                        value={value}
+                        onChange={onChange}
                         placeholder="Escribe tu mensaje"
+                        required
                     />
-
                 </div>
             );
         }
 
-
-        // Renderizar App
-        ReactDOM.render(
-            <App />,
-            document.getElementById('root')
-        );
+        // Renderizado adecuado para React 18
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
 
     </script>
+
     <footer>
         <p>&copy; 2026 Reto Formulario React. Todos los derechos reservados.</p>
     </footer>
