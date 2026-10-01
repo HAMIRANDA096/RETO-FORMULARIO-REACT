@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reto Formulario React</title>
+
+    <!-- React -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+
+    <!-- ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <link rel="stylesheet" href="/index.css">
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        // Componente principal
+        function App() {
+
+            const [usuario, setUsuario] = React.useState("");
+
+            return (
+                <div className="container">
+
+                    <h1>Reto Formulario React</h1>
+
+                    <Usuario />
+
+                    <Correo />
+
+                    <Mensaje />
+
+                    <button
+                        onClick={() => {
+                            alert("Formulario enviado");
+                        }}
+                    >
+                        Enviar
+                    </button>
+
+                </div>
+            );
+        }
+
+
+        // Usuario
+        function Usuario() {
+
+            return (
+                <div>
+
+                    <h2>Nombre:</h2>
+
+                    <input
+                        type="text"
+                        placeholder="Escribe tu nombre"
+                    />
+
+                </div>
+            );
+        }
+
+
+        // Correo
+        function Correo() {
+
+            return (
+                <div>
+
+                    <h2>Correo:</h2>
+
+                    <input
+                        type="email"
+                        placeholder="Escribe tu correo"
+                    />
+
+                </div>
+            );
+        }
+
+
+        // Mensaje
+        function Mensaje() {
+
+            return (
+                <div>
+
+                    <h2>Mensaje:</h2>
+
+                    <input
+                        type="text"
+                        placeholder="Escribe tu mensaje"
+                    />
+
+                </div>
+            );
+        }
+
+
+        // Renderizar App
+        ReactDOM.render(
+            <App />,
+            document.getElementById('root')
+        );
+
+    </script>
+    <footer>
+        <p>&copy; 2026 Reto Formulario React. Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>
